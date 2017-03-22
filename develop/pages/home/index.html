@@ -20,7 +20,7 @@
             <div class="col-xs">
                 <header class="AppHeader navbar navbar-full navbar-light bg-faded">
                     <a href="#"><img src="//www.pgs-soft.com/wp-content/themes/pgstemplate/img/header/pgs-logo-dark.png" alt="Logo" class="AppHeader-logoImage"
-                            data-bind="click: $root.nav.resetCategory" />
+                            data-bind="click: $root.products.resetFilter" />
                     </a>
                     <ul class="nav nav-pills pull-xs-right">
                         <li class="nav-item"><a href="#" class="nav-link">Hello Admin!</a></li>
@@ -43,7 +43,7 @@
                 <main class="AppMain">
                     <div class="ProductCards" data-bind="foreach: products.productsList()"> <!-- lista naszych produktow wybranych z funkcji getProducts -->
                         <!--VIEW: HOME/promoted-->
-                        <div class="ProductCard" data-bind="visible: typeof $root.nav.ourCategory() == 'undefined' && $data.promoted === true,
+                        <div class="ProductCard" data-bind="visible: typeof $root.nav.ourCategory() == 'undefined',
                                                         click: $root.products.getProduct.bind($data)">
                             <img data-bind="attr:{src: $data.imageUrl}">
                             <p data-bind="text: $data.title"></p>
