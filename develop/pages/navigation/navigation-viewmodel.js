@@ -6,10 +6,14 @@ var NavViewModel = function () {
     var dm = new DataModel($.getJSON, $.map);
     dm.getCategories(self.categoriesJson, self.categoriesList);
 
-    self.ourCategory = ko.observable();
-    self.getCategory = function (elem) {
-        self.ourCategory(elem.toLowerCase());
+    self.ourCategory = ko.observable(); // message variable which want to pass to another view model (products)
+
+    self.ourCategory.subscribe(function(newValue){  // send observable variable to
+        shouter.notifySubscribers(newValue, 'clickedCategory'); // the 'topic' named shouter post-box
+    });
+
+    self.getCategory = function () {
+        self.ourCategory(this.toLowerCase());
     };
 
-    console.log('aaa');
 };

@@ -20,9 +20,7 @@
             <div class="col-xs">
                 <header class="AppHeader navbar navbar-full navbar-light bg-faded">
                     <a href="#"><img src="//www.pgs-soft.com/wp-content/themes/pgstemplate/img/header/pgs-logo-dark.png" alt="Logo" class="AppHeader-logoImage"
-                            data-bind="click: $root.products.goToHomeView" />
-                        <!-- data-bind="click: $root.products.goToHomeView"-->
-                        <!--$root.products.promotedFilter -->
+                    data-bind="click: "/>
                     </a>
                     <ul class="nav nav-pills pull-xs-right">
                         <li class="nav-item"><a href="#" class="nav-link">Hello Admin!</a></li>
@@ -34,7 +32,7 @@
             <div class="col-md-3 col-lg-2">
                 <div class="AppNavigation" data-bind="visible: DataModel.prototype.isCatReady() === true">
                     <h6 class="list-group-item">Categories</h6>
-                    <ul class="list-group" data-bind="foreach: nav.categoriesList">
+                    <ul class="list-group" data-bind="foreach: nav.categoriesList, click: products.productByCategory">
                         <li class="list-group-item" data-bind="click: $root.nav.getCategory.bind($data)">
                             <a href="" data-bind="text: $data"></a>
                         </li>
@@ -50,22 +48,23 @@
             </div>
             <div class="col-md-9 col-lg-10">
                 <main class="AppMain">
-                    <!--<div class="ProductCards" data-bind="template: {name: 'template-Home', foreach: products.productsList()}">-->
-                    <div class="ProductCards" data-bind="foreach: products.productsList()">
-                        <!--VIEW: HOME/promoted-->
-                        <div class="ProductCard" data-bind="visible: typeof $root.nav.ourCategory() == 'undefined' && $data.promoted === true && DataModel.prototype.isProdReady() === true,
+                    <!--VIEW: HOME/promoted-->
+                    <div class="ProductCards" data-bind="visible: typeof $root.nav.ourCategory() === 'undefined',
+                                                        foreach: products.productsList()">
+
+                        <div class="ProductCard" id="promotedHome" data-bind="visible: $data.promoted === true && DataModel.prototype.isProdReady() === true,
                                                         click: $root.products.getProduct.bind($data)">
-                            <!--<div class="ProductCard" data-bind="visible: $data.promoted === true,-->
-                            <!--click: $root.products.getProduct.bind($data)">-->
                             <img data-bind="attr:{src: $data.imageUrl}">
                             <p data-bind="text: $data.title"></p>
                             <p data-bind="visible: $data.promoted === true"> *promoted</p>
                             <p data-bind="text: $data.category"></p>
                         </div>
 
-                        <!--VIEW: by CATEGORY-->
-                        <div class="ProductCard" data-bind="visible: typeof $root.nav.ourCategory() !== 'undefined' && $data.category == $root.nav.ourCategory() && DataModel.prototype.isProdReady() === true,
-                                                         click: $root.products.getProduct.bind($data)">
+                    <!--VIEW: by CATEGORY-->
+                    </div>
+                    <div class="ProductCards" data-bind="visible: typeof $root.nav.ourCategory(),
+                                                        foreach: $root.products.categorizedProducts">
+                        <div class="ProductCard" id="categorized" data-bind="click: $root.products.getProduct.bind($data)">
                             <img data-bind="attr:{src: $data.imageUrl}">
                             <p data-bind="text: $data.title"></p>
                             <p data-bind="visible: $data.promoted === true"> *promoted</p>
@@ -113,9 +112,11 @@
     <script src="../../models/datamodel.js"></script>
     <script src="../../pages/navigation/navigation-viewmodel.js"></script>
     <script src="../../pages/products/products-viewmodel.js"></script>
-    <script src="../../pages/product/detailproduct-viewmodel.js"></script>
+    <!--<script src="../../pages/product/detailproduct-viewmodel.js"></script>-->
     <script>
+        var shouter = new ko.subscribable(); // defined globally 'post-box' to pas messages between different view models
         var mvm = new MainViewModel();
+
         ko.applyBindings(mvm);
     </script>
 </body>
