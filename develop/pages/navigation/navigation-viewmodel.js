@@ -1,14 +1,17 @@
 var NavViewModel = function () {
     var self = this;
+    self.categoriesList = ko.observableArray();
+    self.categoriesJson = 'https://frammapp-knockout.firebaseio.com/.json'; //'https://project-5613440220430148247.firebaseio.com/api/v1/categories.json';
+    var dm = new DataModel($.getJSON, $.map);
+    dm.categories(self.categoriesJson, self.categoriesList);
 
-    self.categories = [];
-    self.categoriesList = ko.observableArray(this.categories);
+    self.ourCategory = ko.observable(); // message variable which want to pass to another view model (products)
 
-    self.getProductsCategory = function () {
-        $.getJSON('https://project-5613440220430148247.firebaseio.com/api/v1/categories.json', function (json) {
-            $.map(json, function (elem) { self.categoriesList.push(elem); });
-        });
+    self.ourCategory.subscribe(function(newValue){  // send observable variable to
+        shouter.notifySubscribers(newValue, 'clickedCategory'); // the 'topic' named shouter post-box
+    });
+
+    self.getCategory = function () {
+        self.ourCategory(this.toLowerCase());
     };
-
-    self.getProductsCategory();
 };

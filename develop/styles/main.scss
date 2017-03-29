@@ -1,0 +1,86 @@
+@import 'spinner';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #ED6415;
+  }
+
+.AppHeader {
+  margin-bottom: 30px; }
+.AppHeader IMG {
+  height: 40px; }
+.AppHeader A {
+  color: #F06C19; }
+.AppHeader A:hover {
+  color: #F06C19;
+  text-decoration: underline; }
+
+.AppNavigation {
+  margin-bottom: 30px; }
+.AppNavigation .list-group-item:first-child, .AppNavigation .list-group-item:last-child {
+  border-radius: 0; }
+.AppNavigation A {
+  color: #F06C19; }
+.AppNavigation A:hover {
+  color: #F06C19; }
+
+.ProductCards, .ProductDetails {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+
+  .ProductDetail {
+    width: 100%;
+     background: #fff;
+      display: inline-block;
+    margin: 10px;
+
+    &--Price {
+      size: 20px;
+      color: green;
+    }
+
+    &--Amount {
+      size: 12px;
+      color: crimson;
+    }
+
+    &--Description {
+      size: 11px;
+      color: #90A4AE;
+    }
+  }
+
+.ProductCard {
+  width: 200px;
+  background: #fff;
+  display: inline-block;
+  margin: 10px;
+  cursor: pointer; // to see if element is clickable!
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0 0 20px;
+  }
+}
+.ProductCard IMG {
+  width: 200px;
+  height: 200px;
+  background: #F7F7F9; }
+.ProductCard P {
+  padding: 10px; }
+
+/* ADMIN */
+.AdminTable {
+  background: #fff; }
+
+.AdminForm {
+  background: #fff;
+  padding: 30px; }
+
+
+ li.list-group-item:hover  {
+  background-color: rgba(255, 255, 255, 0.9);
+}

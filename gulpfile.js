@@ -1,6 +1,17 @@
 var browserSync = require('browser-sync').create(),
     gulp = require('gulp'),
-    plugins = require('gulp-load-plugins')(); // automatycznie bedzie zaczytywal pluginy w trakcie ich napotkania
+    plugins = require('gulp-load-plugins')(); // automatyczne bedzie zaczytywal pluginy w trakcie ich napotkania
+// autoprefixer = require('gulp-autoprefixer'),
+// concat = require('gulp-concat'),
+// cssmin = require('gulp-cssmin'),
+// jshint = require('gulp-jshint'),
+// uglify = require('gulp-uglify'),
+// watch = require('gulp-watch'),
+// flatten = require('gulp-flatten'),
+// size = require('gulp-size'),
+// useref = require('gulp-useref'),
+// filter =  require('gulp-filter'),
+// clean = require('gulp-clean');
 
 var DIR_DIST = './release';
 var DIR_SOURCE = './develop';
@@ -15,13 +26,12 @@ gulp.task('assets', ['clean'], function () {
 
 gulp.task('clean', function () {
     return gulp.src(DIR_DIST)
-        .pipe(plugins.clean());
+        .pipe(plugins.clean());     // usuwa zawartosc katalogu
 });
 
 gulp.task('js', function () {
     return gulp.src([DIR_SOURCE + '/**/*.js', '!**/*.min.js'])
         .pipe(plugins.jshint());
-        //.pipe(plugins.jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('js-watch', ['js'], function (done) {
@@ -49,8 +59,9 @@ gulp.task('sass', function () {
     return gulp.src(DIR_SOURCE + '/**/*.scss')
         .pipe(plugins.sass())
         .pipe(plugins.autoprefixer('last 1 version'))
-        .pipe(plugins.csso())
+        .pipe(plugins.cssmin())
         .pipe(gulp.dest(DIR_DIST))
+        .pipe(gulp.dest(DIR_SOURCE))
         .pipe(browserSync.stream());
 });
 
@@ -59,10 +70,12 @@ gulp.task('serve', ['html'], function () { // uruchamia browerSync (zwykle start
         open: true,
         port: 8080,
         server: {
-            baseDir: [
-                DIR_SOURCE,
-                DIR_DIST
-            ]
+            baseDir: [  // katalogi, w ktorych serwer szuka zaciaganych plikow (js, css itd.)
+                DIR_SOURCE + '/pages/home/',
+                DIR_DIST,
+                DIR_SOURCE
+            ],
+            index: 'index.html'
         }
     });
 

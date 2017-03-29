@@ -7,15 +7,21 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <!-- <link href="//fonts.googleapis.com/css?family=Roboto:400,100,300" rel="stylesheet" type="text/css"> -->
     <title>FramApp Template</title>
-    <!--<link rel="stylesheet" href="css/main.css">-->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles/main.css">
+
 </head>
+
 <body>
     <div class="AppContainer container-fluid">
         <div class="row">
             <div class="col-xs">
                 <header class="AppHeader navbar navbar-full navbar-light bg-faded">
-                    <a href="#"><img src="//www.pgs-soft.com/wp-content/themes/pgstemplate/img/header/pgs-logo-dark.png" alt="Logo" class="AppHeader-logoImage" /></a>
+                    <a href="#"><img src="//www.pgs-soft.com/wp-content/themes/pgstemplate/img/header/pgs-logo-dark.png" alt="Logo" class="AppHeader-logoImage"
+                    data-bind="click: $root.goToHome"/>
+                    </a>
                     <ul class="nav nav-pills pull-xs-right">
                         <li class="nav-item"><a href="#" class="nav-link">Hello Admin!</a></li>
                     </ul>
@@ -24,47 +30,81 @@
         </div>
         <div class="row">
             <div class="col-md-3 col-lg-2">
-                <!--<nav class="AppNavigation">
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="KO-templates/KO-categories.html">Categories</a></li>
-                        <li class="list-group-item"><a href="KO-templates/KO-products.html">Products</a></li>
+                <div class="AppNavigation" data-bind="visible: DataModel.isCategoriesReady()">
+                    <h6 class="list-group-item">Categories</h6>
+                    <ul class="list-group" data-bind="foreach: nav.categoriesList, click: products.productByCategory">
+                        <li class="list-group-item" data-bind="click: $root.nav.getCategory.bind($data)">
+                            <a href="" data-bind="text: $data"></a>
+                        </li>
                     </ul>
-                </nav>-->
+                </div>
+                <!--Mr. spinner-->
+                <div class="spinner-wraper" data-bind="visible: !DataModel.isCategoriesReady()">
+                    <div class="spinner">
+                        <div class="dot1"></div>
+                        <div class="dot2"></div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-9 col-lg-10">
-                <!--<main class="appmain">
-                    <div class="admintable table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>name</th>
-                                    <th>action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>category-1</td>
-                                    <td>category-2</td>
-                                    <td><a href="ko-templates/ko-category.html" class="btn">edit</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <main class="AppMain">
+                    <!--VIEW: HOME/promoted-->
+                    <div class="ProductCards" data-bind="visible: $root.products.isPromoVisible(),
+                                                        foreach: products.productsList()">
+                        <div class="ProductCard" id="promotedHome" data-bind="visible: $data.promoted === true && DataModel.isProductReady(),
+                                                        click: $root.products.getProduct.bind($data)">
+                            <img data-bind="attr:{src: $data.imageUrl}">
+                            <p data-bind="text: $data.title"></p>
+                            <p data-bind="visible: $data.promoted === true"> *promoted</p>
+                            <p data-bind="text: $data.category"></p>
+                        </div>
+                    <!--VIEW: by CATEGORY-->
                     </div>
-                </main>-->
+                    <div class="ProductCards" data-bind="visible: typeof $root.nav.ourCategory(),
+                                                        foreach: $root.products.categorizedProducts">
+                        <div class="ProductCard" id="categorized" data-bind="click: $root.products.getProduct.bind($data)">
+                            <img data-bind="attr:{src: $data.imageUrl}">
+                            <p data-bind="text: $data.title"></p>
+                            <p data-bind="visible: $data.promoted === true"> *promoted</p>
+                            <p data-bind="text: $data.category"></p>
+                        </div>
+                        <!--Mr. spinner-->
+                        <div class="spinner-wraper" data-bind="visible: !DataModel.isProductReady()">
+                            <div class="spinner">
+                                <div class="dot1"></div>
+                                <div class="dot2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--VIEW: DETAIL of PRODUCT-->
+                    <div class="ProductDetails">
+
+                        <div class="ProductDetails" data-bind="foreach: products.productsList()">
+                            <div class="ProductDetail" data-bind="visible: title == $root.products.chosenProduct()"> <!--  && DataModel.prototype.isDetReady() === false-->
+                                <img data-bind="attr:{src: $data.imageUrl}">
+                                <h2 data-bind="text: $data.title"></h2>
+                                <p class="ProductDetail--Price" data-bind="text: $data.price"></p>
+                                <p class="ProductDetail--Amount" data-bind="text: $data.amount"></p>
+                                <p class="ProductDetail--Description" data-bind="text: $data.description"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
             </div>
         </div>
     </div>
 
-    <ul data-bind="foreach: categoriesList">
-        <li>
-            <b data-bind="text: description"></b> <u data-bind="text: title"></u>
-        </li>
-    </ul>
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
-    <script data-main="../../scripts/viewmodels" src="../../scripts/require.js"></script>
-</body>
-</html>
+    <!--<script data-main="../../scripts/viewmodels" src="../../scripts/require.js"></script>-->
+    <script src="../../pages/viewmodels.js"></script>
+    <script src="../../models/datamodel.js"></script>
+    <script src="../../pages/navigation/navigation-viewmodel.js"></script>
+    <script src="../../pages/products/products-viewmodel.js"></script>
+    <script src="../../app.js"></script>
 
+</body>
+
+</html>
