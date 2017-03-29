@@ -29,8 +29,7 @@ var DataModel = function (getJSON, map) {   // used dependency injection DataMod
 
     return {
         getCategories: getCategories,
-        getProducts: getProducts,
-        filterProducts: filterProducts
+        getProducts: getProducts
         //getDetails: getDetails
     }
 };

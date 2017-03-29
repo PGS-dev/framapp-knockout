@@ -20,7 +20,7 @@
             <div class="col-xs">
                 <header class="AppHeader navbar navbar-full navbar-light bg-faded">
                     <a href="#"><img src="//www.pgs-soft.com/wp-content/themes/pgstemplate/img/header/pgs-logo-dark.png" alt="Logo" class="AppHeader-logoImage"
-                    data-bind="click: "/>
+                            data-bind="click: " />
                     </a>
                     <ul class="nav nav-pills pull-xs-right">
                         <li class="nav-item"><a href="#" class="nav-link">Hello Admin!</a></li>
@@ -59,9 +59,10 @@
                             <p data-bind="visible: $data.promoted === true"> *promoted</p>
                             <p data-bind="text: $data.category"></p>
                         </div>
+                    </div>
 
                     <!--VIEW: by CATEGORY-->
-                    </div>
+
                     <div class="ProductCards" data-bind="visible: typeof $root.nav.ourCategory(),
                                                         foreach: $root.products.categorizedProducts">
                         <div class="ProductCard" id="categorized" data-bind="click: $root.products.getProduct.bind($data)">
