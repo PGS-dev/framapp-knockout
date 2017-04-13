@@ -10,7 +10,6 @@ var DataModel = function (getJSON, map) {   // used dependency injection DataMod
                 categoriesArray.push(elem.title);
                 self.isCategoriesReady(true);
             });
-            // console.log(ourArray());
         });
     };
 
@@ -21,7 +20,6 @@ var DataModel = function (getJSON, map) {   // used dependency injection DataMod
                 categoriesArray.push(elem);
                 self.isProductReady(true);
             });
-            // console.log(ourArray());
         });
     };
 
