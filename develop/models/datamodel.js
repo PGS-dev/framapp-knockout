@@ -32,9 +32,9 @@ var DataModel = function (getJSON, map) {   // used dependency injection DataMod
     //     items: items
     // }
 
-    // self.isCategoriesReady = ko.observable(false);
-    // self.isProductReady = ko.observable(false);
-    // self.isDetReady = ko.observable(false);
+    self.isCategoriesReady = ko.observable(false);
+    self.isProductReady = ko.observable(false);
+    self.isDetReady = ko.observable(false);
 };
 
 // DataModel.isCategoriesReady = ko.observable(false);

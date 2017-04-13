@@ -27,7 +27,7 @@
             <div class="col-md-3 col-lg-2">
                 <div class="AppNavigation" data-bind="visible: $root.datamodel.isCategoriesReady()">
                     <h6 class="list-group-item">Categories</h6>
-                    <ul class="list-group" data-bind="foreach: $root.nav.categoriesList, click: products.productByCategory">
+                    <ul class="list-group" data-bind="foreach: $root.nav.categoriesList(), click: products.productByCategory()">
                         <li class="list-group-item" data-bind="click: $root.nav.getCategory.bind($data)">
                             <a href="" data-bind="text: $data"></a>
                         </li>
@@ -46,7 +46,7 @@
                     <!--VIEW: HOME/promoted-->
                     <div class="ProductCards" data-bind="visible: $root.products.isPromoVisible(),
                                                         foreach: $root.products.productsList()">
-                        <div class="ProductCard" id="promotedHome" data-bind="visible: $data.promoted === true && $root.datamodel.isProductReady(),
+                        <div class="ProductCard" id="promotedHome" data-bind="visible: $data.promoted && $root.datamodel.isProductReady(),
                                                         click: $root.products.getProduct.bind($data)">
                             <img data-bind="attr:{src: $data.imageUrl}">
                             <p data-bind="text: $data.title"></p>
@@ -56,7 +56,7 @@
                     <!--VIEW: PRODUCTS by CATEGORY-->
                     </div>
                     <div class="ProductCards" data-bind="visible: $root.nav.ourCategory(),  
-                                                        foreach: $root.products.categorizedProducts">
+                                                        foreach: $root.products.categorizedProducts()">
                         <div class="ProductCard" id="categorized" data-bind="click: $root.products.getProduct.bind($data)">
                             <img data-bind="attr:{src: $data.imageUrl}">
                             <p data-bind="text: $data.title"></p>
