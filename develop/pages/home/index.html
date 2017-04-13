@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-md-3 col-lg-2">
-                <div class="AppNavigation" data-bind="visible: $root.datamodel.isCategoriesReady()">
+                <div class="AppNavigation" data-bind="visible: $root.nav.dm.isCategoriesReady">
                     <h6 class="list-group-item">Categories</h6>
                     <ul class="list-group" data-bind="foreach: $root.nav.categoriesList(), click: products.productByCategory()">
                         <li class="list-group-item" data-bind="click: $root.nav.getCategory.bind($data)">
@@ -34,7 +34,7 @@
                     </ul>
                 </div>
                 <!--Mr. spinner-->
-                <div class="spinner-wraper" data-bind="visible: !$root.datamodel.isCategoriesReady()">  <!-- !DataModel.isCategoriesReady() //-->
+                <div class="spinner-wraper" data-bind="visible: !$root.nav.dm.isCategoriesReady">
                     <div class="spinner">
                         <div class="dot1"></div>
                         <div class="dot2"></div>
@@ -46,7 +46,7 @@
                     <!--VIEW: HOME/promoted-->
                     <div class="ProductCards" data-bind="visible: $root.products.isPromoVisible(),
                                                         foreach: $root.products.productsList()">
-                        <div class="ProductCard" id="promotedHome" data-bind="visible: $data.promoted && $root.datamodel.isProductReady(),
+                        <div class="ProductCard" id="promotedHome" data-bind="visible: $data.promoted && $root.nav.dm.isProductReady(),
                                                         click: $root.products.getProduct.bind($data)">
                             <img data-bind="attr:{src: $data.imageUrl}">
                             <p data-bind="text: $data.title"></p>
@@ -64,7 +64,7 @@
                             <p data-bind="text: $data.category"></p>
                         </div>
                         <!--Mr. spinner-->
-                        <div class="spinner-wraper" data-bind="visible: !$root.datamodel.isProductReady()">
+                        <div class="spinner-wraper" data-bind="visible: !$root.nav.dm.isProductReady">
                             <div class="spinner">
                                 <div class="dot1"></div>
                                 <div class="dot2"></div>
@@ -92,7 +92,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
     <script src="../../scripts/sammy-latest.js" type="text/javascript"></script>
     <!--<script data-main="../../scripts/viewmodels" src="../../scripts/require.js"></script>-->
-    <script src="../../pages/viewmodels.js"></script>
+    <script src="../../pages/main-viewmodel.js"></script>
     <script src="../../models/datamodel.js"></script>
     <script src="../../pages/navigation/navigation-viewmodel.js"></script>
     <script src="../../pages/products/products-viewmodel.js"></script>
