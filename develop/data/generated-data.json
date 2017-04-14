@@ -2,17 +2,17 @@
   "categories": {
     "phones": {
       "title": "Phones",
-      "id": "01",
+      "id": "1",
       "description": "pppppppp"
     },
     "notebooks": {
       "title": "Notebooks",
-      "id": "02",
+      "id": "2",
       "description": "nnnnnnnnn"
     },
     "televisions": {
       "title": "Televisions",
-      "id": "03",
+      "id": "3",
       "description": "ttttttttttt"
     }
   },

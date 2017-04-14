@@ -17,9 +17,6 @@ var MainViewModel = function () {
     self.updateCategory = function(model) {
         var idOfChoosen = self.nav.ourCategoryId(),
             changedCategoryTitle = self.products.chosenCategory();
-            // changedCategoryByKey =
-
-
 
 
         $.ajax({

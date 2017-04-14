@@ -17,9 +17,9 @@ var NavViewModel = function () {
     });
 
     self.getCategory = function () {
-        self.ourCategory(this.title.toLowerCase()); // in case of 'this' use this title (cause ...getCategory.bind($date) in html)
-        self.ourCategoryId(this.id);
-        // self.categoriesKeys(this);
-        console.log('key is named '+ self.categoriesKeys());
+        self.ourCategory(this); // in case of 'this' use this title (cause ...getCategory.bind($date) in html)
+        // self.ourCategoryId(this.id);
+        // self.categoriesKeys();
+        console.log('key is named '+ self.categoriesKeys()[this.id]);
     };
 };

@@ -2,18 +2,17 @@
 
 var DataModel = function (getJSON, map) {   // used dependency injection DataModel($.getJSON, $.map)
 
-
     var categories = function (jsonFileUrl, categoriesArray, categoriesNames) {
         getJSON(jsonFileUrl, function (json) {
             var firstJSON = json.categories;
             categoriesNames.push(Object.keys(firstJSON));
+
             map(firstJSON, function (elem) {
                 categoriesArray.push(elem);
 
-                DataModel.isCategoriesReady(true);
             });
-
-            // console.log(ourArray());
+            console.log(categoriesArray());
+            // console.log('keys dta...  '+ categoriesNames());
         })
             .done(function () {
                 // console.log("first 'category' success");
@@ -28,7 +27,6 @@ var DataModel = function (getJSON, map) {   // used dependency injection DataMod
             var firstJSON = json.products;
             map(firstJSON, function (elem) {
                 itemsArray.push(elem);
-                DataModel.isProductReady(true);
             });
             // console.log(ourArray());
         })
@@ -41,31 +39,9 @@ var DataModel = function (getJSON, map) {   // used dependency injection DataMod
 
     };
 
-
-
-
-    // self.UpdateCountry = function (model, event) {
-    //     $.ajax({
-    //         url: "api/Country/" + model.id(),
-    //         type: "PUT",
-    //         dataType: "json",
-    //         contentType: "application/json",
-    //         data: ko.toJSON(model),
-    //         success: function (data) {
-    //             model.isEdit(false);
-    //         },
-    //         error: function (err) {
-    //             alert('Error');
-    //         }
-    //     });
-    // };
-
-
-
     return {
         categories: categories,
         items: items
-        // updateCategory: updateCategory
     }
 };
 
