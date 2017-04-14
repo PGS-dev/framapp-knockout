@@ -15,3 +15,4 @@ var NavViewModel = function () {
         self.ourCategory(this.toLowerCase());
     };
 };
+

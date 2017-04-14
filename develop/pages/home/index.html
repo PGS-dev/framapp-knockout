@@ -44,9 +44,9 @@
             <div class="col-md-9 col-lg-10">
                 <main class="AppMain">
                     <!--VIEW: HOME/promoted-->
-                    <div class="ProductCards" data-bind="visible: $root.products.isPromoVisible,
-                                                        foreach: $root.products.productsList">
-                        <div class="ProductCard" id="promotedHome" data-bind="visible: $data.promoted && $root.nav.dm.isProductReady,
+                    <div class="ProductCards" data-bind="visible: $root.products.isPromoVisible(),
+                                                        foreach: $root.products.productsList()">
+                        <div class="ProductCard" id="promotedHome" data-bind="visible: $data.promoted && $root.products.dm.isProductReady,
                                                         click: $root.products.getProduct.bind($data)">
                             <img data-bind="attr:{src: $data.imageUrl}">
                             <p data-bind="text: $data.title"></p>
@@ -55,8 +55,8 @@
                         </div>
                     </div>
                     <!--VIEW: PRODUCTS by CATEGORY-->
-                    <div class="ProductCards" data-bind="visible: $root.nav.ourCategory,  
-                                                        foreach: $root.products.categorizedProducts">
+                    <div class="ProductCards" data-bind="visible: $root.nav.ourCategory(),
+                                                        foreach: $root.products.categorizedProducts()">
                         <div class="ProductCard" id="categorized" data-bind="click: $root.products.getProduct.bind($data)">
                             <img data-bind="attr:{src: $data.imageUrl}">
                             <p data-bind="text: $data.title"></p>
@@ -64,7 +64,7 @@
                             <p data-bind="text: $data.category"></p>
                         </div>
                         <!--Mr. spinner-->
-                        <div class="spinner-wraper" data-bind="visible: !$root.nav.dm.isProductReady">
+                        <div class="spinner-wraper" data-bind="visible: !$root.products.dm.isProductReady">
                             <div class="spinner">
                                 <div class="dot1"></div>
                                 <div class="dot2"></div>
