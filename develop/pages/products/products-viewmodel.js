@@ -12,6 +12,7 @@ var ProductsViewModel = function () {
     /* -- SHOW COLLECTION OF PRODUCTS BY CATEGORY -- */
     self.categorizedProducts = ko.observableArray();
     self.chosenCategory = ko.observable(); // this variable will be able to get message from other through 'shouter' post-box
+    // Shouter - wzor odbierania zmiennej
     shouter.subscribe(function (selectedCategory) { // with global defined 'shouter' we can receive message from other view model
         self.chosenCategory(selectedCategory); // passing message into value observable here...
     }, self, "clickedCategory"); // using 'topic' named when defining message to passing - in other viewModel -> nav
@@ -22,10 +23,11 @@ var ProductsViewModel = function () {
     /* -- SHOW DETAILS OF CHOSEN PRODUCT -- */
     self.chosenProduct = ko.observable();
     self.getProduct = function () {
-        location.hash = this.category +'/'+this.title; //
+        location.hash = this.category + '/' + this.title; //
     };
 
     /* -- SAMMY - PLUGIN FOR ROUTING -- */
+    self.ravioli = ko.observable(true);
     Sammy(function(){
         this.get('#:home-promoted', function(){
             self.categorizedProducts.removeAll(); // clear collection of product by category
@@ -36,20 +38,28 @@ var ProductsViewModel = function () {
         this.get('#:category', function(){
             self.categorizedProducts.removeAll(); // clean observable array from other
 
-            for (var i = 0; i < self.productsList().length; i++) {  // make collection of product from chosen category
-                if (self.productsList()[i].category === this.params.category) {
-                    self.categorizedProducts.push(self.productsList()[i]);
-                }
-            }
+            // for (var i = 0; i < self.productsList().length; i++) {  // make collection of product from chosen category
+            //     if (self.productsList()[i].category === this.params.category) {
+            //         self.categorizedProducts.push(self.productsList()[i]);
+            //     }
+            // }
+            self.pcdm = new ProductsCategorizedDataModel($.getJSON, $.map);
+            self.pcdm.items(self.productsJson, self.categorizedProducts, this.params.category);
+
+            console.log(self.productsList().length + " - " + Date.now());
+
+            self.ravioli.subscribe(function(val) {  // send observable variable to
+                shouter.notifySubscribers(val, 'ravioli'); // the 'topic' named shouter post-box
+            });
 
             self.chosenProduct(null); // category is chosen so delete Details from UI
             self.isPromoVisible(false); // make home-promoted view invisible
         });
 
         this.get('#:category/:title', function(){
+            self.categorizedProducts.removeAll(); // removes categorized ProductCards from UI, Details of product stays in UI
             self.chosenProduct(this.params.title); // shows card with chosen product title
             self.isPromoVisible(false); // make home-promoted view invisible
-            self.categorizedProducts.removeAll(); // removes categorized ProductCards from UI, Details of product stays in UI
         });
 
         this.get('', function() {

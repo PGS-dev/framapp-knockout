@@ -8,9 +8,8 @@ var NavigationDataModel = function (getJSON, map) {   // used dependency injecti
             var firstJSON = json.categories;
             map(firstJSON, function (elem) {
                 categoriesArray.push(elem.title);
-                self.isCategoriesReady(true);
-
             });
+            self.isCategoriesReady(true);
         });
     };
 
