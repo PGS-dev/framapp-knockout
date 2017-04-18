@@ -9,6 +9,7 @@ var DataModel = function (getJSON, map) {   // used dependency injection DataMod
             map(firstJSON, function (elem) {
                 categoriesArray.push(elem.title);
                 self.isCategoriesReady(true);
+
             });
         });
     };
@@ -27,4 +28,3 @@ var DataModel = function (getJSON, map) {   // used dependency injection DataMod
     self.isProductReady = ko.observable(false);
     self.isDetReady = ko.observable(false);
 };
-
