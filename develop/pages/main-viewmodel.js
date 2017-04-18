@@ -2,6 +2,6 @@
 
 var MainViewModel = function () {
     var self = this;
-    self.nav = new NavViewModel();
+    self.navigation = new NavigationViewModel();
     self.products = new ProductsViewModel();
 };
