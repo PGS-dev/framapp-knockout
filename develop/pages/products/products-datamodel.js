@@ -10,14 +10,6 @@ var ProductsDataModel = function (getJSON, map) {   // used dependency injection
                 productsArray.push(elem);
             });
             self.isProductReady(true);
-
-            console.log(isSammy);
-            if (isSammy === true) {
-                console.log('true');
-            }
-            else         {
-                console.log('not true');
-            }
         });
     };
 

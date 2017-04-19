@@ -63,14 +63,15 @@
                             <p data-bind="visible: $data.promoted"> *promoted</p>
                             <p data-bind="text: $data.category"></p>
                         </div>
-                        <!--Mr. spinner-->
+                        
+                    </div>
+                    <!--Mr. spinner-->
                         <div class="spinner-wraper" data-bind="visible: !$root.products.pdm.isProductReady">
                             <div class="spinner">
                                 <div class="dot1"></div>
                                 <div class="dot2"></div>
                             </div>
                         </div>
-                    </div>
                     <!--VIEW: DETAILS of PRODUCT-->
                     <div class="ProductDetails">
                         <div class="ProductDetails" data-bind="foreach: $root.products.productsList">

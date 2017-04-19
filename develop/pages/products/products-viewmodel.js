@@ -23,45 +23,35 @@ var ProductsViewModel = function () {
     /* -- SHOW DETAILS OF CHOSEN PRODUCT -- */
     self.chosenProduct = ko.observable();
     self.getProduct = function () {
-        location.hash = this.category + '/' + this.title; //
+        location.hash = this.category + '/' + this.title;
     };
 
     /* -- SAMMY - PLUGIN FOR ROUTING -- */
-    Sammy(function(){
-        this.get('#:home-promoted', function(){
+    Sammy(function () {
+        this.get('#:home-promoted', function () {
             self.categorizedProducts.removeAll(); // clear collection of product by category
             self.chosenProduct(null); // hide chosen product view
             self.isPromoVisible(true); // show promoted products from all categories
         });
 
-        this.get('#:category', function(){
+        this.get('#:category', function () {
             self.categorizedProducts.removeAll(); // clean observable array from other
-
-            // for (var i = 0; i < self.productsList().length; i++) {  // make collection of product from chosen category
-            //     if (self.productsList()[i].category === this.params.category) {
-            //         self.categorizedProducts.push(self.productsList()[i]);
-            //     }
-            // }
             self.pcdm = new ProductsCategorizedDataModel($.getJSON, $.map);
             self.pcdm.items(self.productsJson, self.categorizedProducts, this.params.category);
-
-            console.log(self.productsList().length + " - " + Date.now());
-            isSammy = true;
-
             self.chosenProduct(null); // category is chosen so delete Details from UI
             self.isPromoVisible(false); // make home-promoted view invisible
         });
 
-        this.get('#:category/:title', function(){
+        this.get('#:category/:title', function () {
             self.categorizedProducts.removeAll(); // removes categorized ProductCards from UI, Details of product stays in UI
             self.chosenProduct(this.params.title); // shows card with chosen product title
             self.isPromoVisible(false); // make home-promoted view invisible
         });
 
-        this.get('', function() {
+        this.get('', function () {
             this.app.runRoute('get', '#home-promoted');
             var injectedURL = '#home-promoted';
-            window.history.pushState({page: 'default'}, injectedURL, injectedURL);
+            window.history.pushState({ page: 'default' }, injectedURL, injectedURL);
         });
 
     }).run();
