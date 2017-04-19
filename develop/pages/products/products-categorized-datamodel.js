@@ -12,6 +12,7 @@ var ProductsCategorizedDataModel = function (getJSON, map) {   // used dependenc
                 }
             });
             self.isProductReady(true);
+            console.log('catego');
         });
     };
 

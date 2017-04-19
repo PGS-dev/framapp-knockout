@@ -11,17 +11,12 @@ var ProductsDataModel = function (getJSON, map) {   // used dependency injection
             });
             self.isProductReady(true);
 
-            self.receiver = ko.observable();
-            shouter.subscribe(function (val) { // with global defined 'shouter' we can receive message from other view model
-                self.receiver(val); // passing message into value observable here...
-            }, self, "ravioli");
-
-            console.log(self.receiver());
-            if (self.receiver() == true) {
-                console.log('done');
+            console.log(isSammy);
+            if (isSammy === true) {
+                console.log('true');
             }
             else         {
-                console.log('not ravioli');
+                console.log('not true');
             }
         });
     };

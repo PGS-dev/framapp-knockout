@@ -27,7 +27,6 @@ var ProductsViewModel = function () {
     };
 
     /* -- SAMMY - PLUGIN FOR ROUTING -- */
-    self.ravioli = ko.observable(true);
     Sammy(function(){
         this.get('#:home-promoted', function(){
             self.categorizedProducts.removeAll(); // clear collection of product by category
@@ -47,10 +46,7 @@ var ProductsViewModel = function () {
             self.pcdm.items(self.productsJson, self.categorizedProducts, this.params.category);
 
             console.log(self.productsList().length + " - " + Date.now());
-
-            self.ravioli.subscribe(function(val) {  // send observable variable to
-                shouter.notifySubscribers(val, 'ravioli'); // the 'topic' named shouter post-box
-            });
+            isSammy = true;
 
             self.chosenProduct(null); // category is chosen so delete Details from UI
             self.isPromoVisible(false); // make home-promoted view invisible
