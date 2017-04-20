@@ -11,11 +11,8 @@ var ProductsCategorizedDataModel = function (getJSON, map) {   // used dependenc
                     categorizedProductsArray.push(elem);
                 }
             });
-            self.isProductReady(true);
-            console.log('catego');
         });
     };
 
     self.isProductReady = ko.observable(false);
-    //self.isDetailReady = ko.observable(false); // for future spinner
 };
