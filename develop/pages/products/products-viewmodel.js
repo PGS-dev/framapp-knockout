@@ -20,7 +20,6 @@ var ProductsViewModel = function () {
     /* -- SHOW DETAILS OF CHOSEN PRODUCT -- */
     self.chosenProduct = ko.observable();
     self.getProduct = function () {
-        location.hash = this.category + '/' + this.title; //
+        location.hash = this.category + '/' + this.title;
     };
-
 };
