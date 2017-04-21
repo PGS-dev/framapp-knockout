@@ -12,8 +12,10 @@ var ProductsCategorizedDataModel = function (getJSON, map) {   // used dependenc
                 }
             });
             self.isProductReady(true);
-            
+
             console.log("-" + self.isProductReady().toString());
+            console.log("-" + categorizedProductsArray().length);
+            console.debug(Date.now());
         });
     };
 
