@@ -15,10 +15,8 @@ var MainViewModel = function () {
 
         this.get('#:category', function(){
             self.products.categorizedProducts.removeAll(); // clean observable array from other
-
             self.products.pcdm = new ProductsCategorizedDataModel($.getJSON, $.map);
             self.products.pcdm.items(self.products.productsJson, self.products.categorizedProducts, this.params.category);
-
             self.products.chosenProduct(null); // category is chosen so delete Details from UI
             self.products.isPromoVisible(false); // make home-promoted view invisible
         });
