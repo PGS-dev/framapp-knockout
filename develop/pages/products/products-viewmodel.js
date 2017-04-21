@@ -22,4 +22,6 @@ var ProductsViewModel = function () {
     self.getProduct = function () {
         location.hash = this.category + '/' + this.title;
     };
+
+    //$('div[id="categorized"]').attr('data-bind', 'click: $root.products.getProduct.bind($data)');
 };
