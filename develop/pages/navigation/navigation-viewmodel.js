@@ -14,6 +14,7 @@ var NavigationViewModel = function () {
     });
     self.getCategory = function () {
         self.ourCategory(this.toLowerCase());
+        location.hash = this.toLowerCase();
     };
 };
 
