@@ -11,7 +11,7 @@ var ProductsCategorizedDataModel = function (getJSON, map) {   // used dependenc
                     categorizedProductsArray.push(elem);
                 }
             });
-            //self.isProductReady(true);
+            self.isProductReady(true);
         });
     };
 
